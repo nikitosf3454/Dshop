@@ -10,7 +10,7 @@
     <header>
         <h1>FPV Motors</h1>
         <nav>
-            <a href="{{ url_for('index') }}">Home</a>
+            <a href="/index.html">Home</a>
         </nav>
     </header>
 
@@ -22,7 +22,7 @@
                 <h2 class="product-name">{{ motor.motor_name }}</h2>
                 <p class="product-description">{{ motor.motor_description }}</p>
                 <span class="product-price">${{ motor.motor_price }}</span>
-                <a href="{{ url_for('view_motor', motor_id=motor.motor_id) }}" class="view-details">View Details</a>
+                <a href="/view_motor.html?motor_id={{ motor.motor_id }}" class="view-details">View Details</a>
             </div>
             {% endfor %}
         </div>
