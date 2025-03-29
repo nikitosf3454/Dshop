@@ -13,8 +13,8 @@
     <!-- Header -->
     <header>
         <div class="navigation">
-            <a href="/Motors">Motors</a>
-            <a href="{{ url_for('view_cart') }}" class="cart-button">Shopping Cart</a>
+            <a href="http://127.0.0.1:5000/motors">Motors</a>
+            <a href="http://127.0.0.1:5000/view_cart" class="cart-button">Shopping Cart</a>
         </div>
         <div class="profile-container">
             <button class="profile-button" onclick="window.location.href='{{ url_for('profile') }}'">
@@ -28,7 +28,7 @@
         <div class="hero-content">
             <h1>Explore the Future of FPV Drones</h1>
             <p>Get the best FPV drones for all your flying adventures. Discover top-tier products at unbeatable prices.</p>
-            <a href="{{ url_for('about_us') }}" class="cta-button">About Us</a>
+            <a href="http://127.0.0.1:5000/about_us" class="cta-button">About Us</a>
         </div>
     </section>
 
@@ -59,8 +59,8 @@
 
                         <!-- Action Buttons -->
                         <div class="product-buttons">
-                            <a href="{{ url_for('view_drone', drone_id=drone.id) }}" class="quick-view-button">Quick View</a>
-                            <a href="{{ url_for('buy_now', product_id=drone.id) }}" class="buy-now-button">Buy Now</a>
+                            <a href="/view_drone.html?id=DRONE_ID" class="quick-view-button">Quick View</a>
+                            <a href="/buy_now.html?product_id=DRONE_ID" class="buy-now-button">Buy Now</a>
                         </div>
                     </div>
                 {% endfor %}
