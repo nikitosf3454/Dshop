@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore top-tier FPV drones at unbeatable prices. Shop now and elevate your flying experience!">
     <title>FPV Drone Shop</title>
-    <img src="https://example.com/path/to/drone-image.jpg" alt="Drone Name" class="product-image">
+
+    <!-- Link your CSS file or other assets here -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
+
 <body>
+    <!-- Header Section -->
     <header>
         <div class="navigation">
             <a href="http://127.0.0.1:5000/motors">Motors</a>
             <a href="http://127.0.0.1:5000/view_cart" class="cart-button">Shopping Cart</a>
         </div>
+
         <div class="profile-container">
             <button class="profile-button" onclick="window.location.href='{{ url_for('profile') }}'">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4z1mQAlc00ncZ2qpeqKjRSSv28pQ6McAmhg&s" alt="Profile Icon">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4z1mQAlc00ncZ2qpeqKjRSSv28pQ6McAmhg&s" alt="Profile Icon" />
             </button>
         </div>
     </header>
@@ -29,9 +34,8 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Main Content Section -->
     <main>
-        <!-- Featured Products -->
         <section class="product-featured">
             <h2>Featured FPV Drones</h2>
             <p>Browse our collection of top-rated drones, perfect for every level of drone enthusiast.</p>
@@ -39,10 +43,8 @@
             <div class="product-grid">
                 {% for drone in drones %}
                     <div class="product-card">
-                        <!-- Product Image -->
-                        <img src="images/drone1.jpg" alt="Drone Name" class="product-image">
-
-                        <!-- Product Details -->
+                        <!-- Fixed Image URL issue -->
+                        <img src="{{ drone.image_url }}" alt="{{ drone.name }}" class="product-image">
                         <h3 class="product-name">{{ drone.name }}</h3>
                         <div class="price-section">
                             {% if drone.discounted_price %}
@@ -53,8 +55,6 @@
                             {% endif %}
                         </div>
                         <div class="rating">⭐⭐⭐⭐⭐ (0 reviews)</div>
-
-                        <!-- Action Buttons -->
                         <div class="product-buttons">
                             <a href="/view_drone.html?id=DRONE_ID" class="quick-view-button">Quick View</a>
                             <a href="/buy_now.html?product_id=DRONE_ID" class="buy-now-button">Buy Now</a>
@@ -65,7 +65,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 FPV Drone Shop. All Rights Reserved.</p>
     </footer>
