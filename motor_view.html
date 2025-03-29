@@ -9,8 +9,8 @@
 <body>
     <header>
         <div class="navigation">
-            <a href="{{ url_for('index') }}" class="home-button">Home</a>
-            <a href="{{ url_for('view_cart') }}">Shopping Cart</a>
+            <a href="/index.html" class="home-button">Home</a>
+            <a href="/cart.html" class="cart-button">Shopping Cart</a>
         </div>
     </header>
 
@@ -22,8 +22,8 @@
             <h1>{{ motor['motor_name'] }}</h1>
             <p>{{ motor['motor_description'] }}</p>
             <p>Price: ${{ motor['motor_price'] }}</p>
-            <a href="{{ url_for('add_to_cart', product_type='motor', product_id=motor['motor_id']) }}" class="add-to-cart-button">Add to Cart</a>
-            <a href="{{ url_for('buy_now', product_type='motor', product_id=motor.motor_id) }}">Buy Now</a>
+            <a href="/add_to_cart.html?product_type=motor&product_id={{ motor['motor_id'] }}" class="add-to-cart-button">Add to Cart</a>
+            <a href="/buy_now.html?product_type=motor&product_id={{ motor.motor_id }}">Buy Now</a>
         </div>
     </div>
 
