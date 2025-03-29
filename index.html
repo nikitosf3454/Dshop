@@ -37,8 +37,7 @@
             <div class="product-grid">
                 {% for drone in drones %}
                     <div class="product-card">
-                        <!-- Fixed Image URL issue -->
-                        <img src="{{ drone.image_url }}" alt="{{ drone.name }}" class="product-image">
+                       <img src="https://www.example.com/path/to/your/image.jpg" alt="Drone Name" class="product-image">
                         <h3 class="product-name">{{ drone.name }}</h3>
                         <div class="price-section">
                             {% if drone.discounted_price %}
