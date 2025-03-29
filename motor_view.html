@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ motor.motor_name }} - FPV Motors Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="home-button">Home</a>
+            <a href="{{ url_for('view_cart') }}">Shopping Cart</a>
+        </div>
+    </header>
+
+    <div class="motor-view-container">
+        <div class="motor-image-section">
+            <img src="{{ motor.motor_image_url }}" alt="{{ motor.motor_name }}">
+        </div>
+        <div class="motor-info-section">
+            <h1>{{ motor['motor_name'] }}</h1>
+            <p>{{ motor['motor_description'] }}</p>
+            <p>Price: ${{ motor['motor_price'] }}</p>
+            <a href="{{ url_for('add_to_cart', product_type='motor', product_id=motor['motor_id']) }}" class="add-to-cart-button">Add to Cart</a>
+            <a href="{{ url_for('buy_now', product_type='motor', product_id=motor.motor_id) }}">Buy Now</a>
+        </div>
+    </div>
+
+    <div class="motor-characteristics">
+        <h3>Specifications:</h3>
+        <table class="characteristics-table">
+            <thead>
+                <tr>
+                    <th>Specification</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>KV Rating:</strong></td>
+                    <td>{{ motor.kv_rating }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Stator Size:</strong></td>
+                    <td>{{ motor.stator_size }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Weight:</strong></td>
+                    <td>{{ motor.motor_weight }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Max Thrust:</strong></td>
+                    <td>{{ motor.max_thrust }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Voltage:</strong></td>
+                    <td>{{ motor.voltage }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Rating Section -->
+    <div class="rating-section">
+        <h3>Rate this Motor:</h3>
+        <form action="/vote/motor/{{ motor.motor_id }}" method="post" id="voteForm">
+            <div class="rating-area">
+                <input type="radio" id="star-5" name="rating" value="5">
+                <label for="star-5" title="5 stars"></label>
+                <input type="radio" id="star-4" name="rating" value="4">
+                <label for="star-4" title="4 stars"></label>
+                <input type="radio" id="star-3" name="rating" value="3">
+                <label for="star-3" title="3 stars"></label>
+                <input type="radio" id="star-2" name="rating" value="2">
+                <label for="star-2" title="2 stars"></label>
+                <input type="radio" id="star-1" name="rating" value="1">
+                <label for="star-1" title="1 star"></label>
+            </div>
+            <textarea name="comment" placeholder="Leave a comment..." rows="4" required></textarea>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Submit Vote</button>
+        </form>
+    </div>
+
+    <!-- Display Votes -->
+    <div class="rating-result">
+        <h3>User Ratings:</h3>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch(`/votes/motor/{{ motor.motor_id }}`)
+                .then(response => response.json())
+                .then(votes => {
+                    const container = document.querySelector(".rating-result");
+                    votes.forEach(vote => {
+                        const voteElement = document.createElement("div");
+                        voteElement.innerHTML = `
+                            <p><strong>${vote.user_email}</strong> rated ${vote.rating}/5</p>
+                            <p>${vote.comment}</p>
+                            <p><em>${new Date(vote.created_at).toLocaleString()}</em></p>
+                        `;
+                        container.appendChild(voteElement);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

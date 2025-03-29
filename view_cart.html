@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Overlay when cart is empty */
+        .empty-cart-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if cart and cart|length > 0 %}
+                    {% for item in cart %}
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs">
+                                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="img-responsive" style="max-width:100px; max-height:100px;">
+                                </div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">{{ item.name }}</h4>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">${{ item.price }}</td>
+                        <td data-th="Quantity">
+                            <input type="number" class="form-control text-center" value="1" min="1">
+                        </td>
+                        <td data-th="Subtotal" class="text-center">${{ item.price }}</td>
+                        <td class="actions" data-th="">
+                            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                            <a href="{{ url_for('remove_from_cart', product_id=item.id, product_type=item.type) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <p>Your cart is empty. Please add items to the cart to proceed.</p>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+            <tfoot>
+                {% if cart and cart|length > 0 %}
+                <tr class="visible-xs">
+                    <td class="text-center"><strong>Total ${{ total_price }}</strong></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="{{ url_for('index') }}" class="btn btn-warning">
+                            <i class="fa fa-angle-left"></i> Continue Shopping
+                        </a>
+                    </td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center">
+                        <strong>Total ${{ total_price }}</strong>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('checkout') }}" class="btn btn-success btn-block">
+                            Checkout <i class="fa fa-angle-right"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endif %}
+            </tfoot>
+        </table>
+
+        <!-- Empty cart overlay -->
+        <div class="empty-cart-overlay" id="emptyCartOverlay">
+            <div>
+                <h2>Your cart is empty</h2>
+                <p>Please add items to your cart to proceed.</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        {% if not cart or cart|length == 0 %}
+            document.getElementById('emptyCartOverlay').style.display = 'flex';
+        {% endif %}
+    </script>
+</body>
+</html>

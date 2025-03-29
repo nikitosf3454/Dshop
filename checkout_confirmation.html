@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Checkout Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="col-md-6 offset-md-3 bg-light p-4 rounded">
+      <h4 class="my-4">Billing Address</h4>
+      <form id="checkout-form" action="checkout-confirmation.html" method="GET">
+
+        <!-- Name fields -->
+        <div class="form-row">
+          <div class="col-md-6 form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="First Name" required>
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Last Name" required>
+          </div>
+        </div>
+
+        <!-- Address and Payment Details -->
+        <!-- (You can add other fields like username, email, etc., from the original code) -->
+
+        <!-- Example of items purchased -->
+        <input type="hidden" name="items" value="Product 1, Product 2, Product 3"> <!-- Hidden item list -->
+
+        <!-- Submit button -->
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to Checkout</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

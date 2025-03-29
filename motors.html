@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPV Motors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>FPV Motors</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-grid">
+            {% for motor in motors %}
+            <div class="product-card">
+                <img src="{{ motor.motor_image_url }}" alt="{{ motor.motor_name }}" class="product-image">
+                <h2 class="product-name">{{ motor.motor_name }}</h2>
+                <p class="product-description">{{ motor.motor_description }}</p>
+                <span class="product-price">${{ motor.motor_price }}</span>
+                <a href="{{ url_for('view_motor', motor_id=motor.motor_id) }}" class="view-details">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

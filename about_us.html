@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Navigation/Breadcrumbs -->
+    <header>
+        <div class="breadcrumbs">
+            <a href="{{ url_for('index') }}">Home</a>  <span>FPV Drones</span> <a href="{{ url_for('motors') }}">motors</a>
+        </div>
+    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | FPV Drone Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- About Us Section -->
+    <section class="about-us">
+        <div class="about-content">
+            <h1>About FPV Drone Shop</h1>
+            <p>We are passionate about drones and the world of FPV flying. At FPV Drone Shop, we provide a curated selection of high-performance FPV drones, accessories, and gear for both hobbyists and professionals alike.</p>
+            <p>Our mission is to offer top-quality products at affordable prices while ensuring customer satisfaction with every purchase. Whether you’re just getting started or are a seasoned flyer, we have everything you need to take your FPV adventures to new heights.</p>
+
+            <a href="{{ url_for('index') }}" class="cta-button">Back to Shop</a> <!-- Button to return to the shop -->
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 FPV Drone Shop. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ drone.name }} - FPV Drone Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="home-button">Home</a>
+            <a href="{{ url_for('view_cart') }}">Shopping Cart</a>
+        </div>
+    </header>
+
+    <div class="drone-view-container">
+        <div class="drone-image-section">
+            <img src="{{ drone.image_url }}" alt="{{ drone.name }}">
+        </div>
+        <div class="drone-info-section">
+            <h1>{{ drone['name'] }}</h1>
+            <p>{{ drone['description'] }}</p>
+            <p>Price: ${{ drone['price'] }}</p>
+            <!-- Add to Cart Button -->
+            <a href="{{ url_for('add_to_cart', product_type='drone', product_id=drone['id']) }}" class="add-to-cart-button">
+                Add to Cart
+            </a>
+            <!-- Buy Now Button -->
+            <a href="{{ url_for('buy_now', product_type='drone', product_id=drone.id) }}" class="buy-now-button">
+                Buy Now
+            </a>
+        </div>
+    </div>
+
+    <div class="drone-characteristics">
+        <h3>Specifications:</h3>
+        <table class="characteristics-table">
+            <thead>
+                <tr>
+                    <th>Specification</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Frame:</strong></td>
+                    <td>{{ drone.frame }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Wheelbase Size:</strong></td>
+                    <td>{{ drone.wheelbase_size }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Weight:</strong></td>
+                    <td>{{ drone.weight }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Top Plate Thickness:</strong></td>
+                    <td>{{ drone.top_plate_thickness }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Center Plate Thickness:</strong></td>
+                    <td>{{ drone.center_plate_thickness }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Bottom Plate Thickness:</strong></td>
+                    <td>{{ drone.bottom_plate_thickness }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Arm Thickness:</strong></td>
+                    <td>{{ drone.arm_thickness }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Flight Controller:</strong></td>
+                    <td>{{ drone.flight_controller }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Rating Section -->
+    <div class="rating-section">
+        <h3>Rate this Drone:</h3>
+        <form action="/vote/drone/{{ drone.id }}" method="post" id="voteForm">
+            <div class="rating-area">
+                <input type="radio" id="star-5" name="rating" value="5">
+                <label for="star-5" title="5 stars"></label>
+                <input type="radio" id="star-4" name="rating" value="4">
+                <label for="star-4" title="4 stars"></label>
+                <input type="radio" id="star-3" name="rating" value="3">
+                <label for="star-3" title="3 stars"></label>
+                <input type="radio" id="star-2" name="rating" value="2">
+                <label for="star-2" title="2 stars"></label>
+                <input type="radio" id="star-1" name="rating" value="1">
+                <label for="star-1" title="1 star"></label>
+            </div>
+            <textarea name="comment" placeholder="Leave a comment..." rows="4" required></textarea>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Submit Vote</button>
+        </form>
+    </div>
+
+    <!-- Display Votes -->
+    <div class="rating-result">
+        <h3>User Ratings:</h3>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch(`/votes/drone/{{ drone.id }}`)
+                .then(response => response.json())
+                .then(votes => {
+                    const container = document.querySelector(".rating-result");
+                    votes.forEach(vote => {
+                        const voteElement = document.createElement("div");
+                        voteElement.innerHTML = `
+                            <p><strong>${vote.user_email}</strong> rated ${vote.rating}/5</p>
+                            <p>${vote.comment}</p>
+                            <p><em>${new Date(vote.created_at).toLocaleString()}</em></p>
+                        `;
+                        container.appendChild(voteElement);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

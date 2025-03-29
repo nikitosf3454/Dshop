@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore top-tier FPV drones at unbeatable prices. Shop now and elevate your flying experience!">
+    <title>FPV Drone Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navigation">
+            <a href="{{ url_for('motors') }}" class="motors">Motors</a>
+            <a href="{{ url_for('view_cart') }}" class="cart-button">Shopping Cart</a>
+        </div>
+        <div class="profile-container">
+            <button class="profile-button" onclick="window.location.href='{{ url_for('profile') }}'">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4z1mQAlc00ncZ2qpeqKjRSSv28pQ6McAmhg&s" alt="Profile Icon" />
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Explore the Future of FPV Drones</h1>
+            <p>Get the best FPV drones for all your flying adventures. Discover top-tier products at unbeatable prices.</p>
+            <a href="{{ url_for('about_us') }}" class="cta-button">About Us</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Featured Products -->
+        <section class="product-featured">
+            <h2>Featured FPV Drones</h2>
+            <p>Browse our collection of top-rated drones, perfect for every level of drone enthusiast.</p>
+
+            <div class="product-grid">
+                {% for drone in drones %}
+                    <div class="product-card">
+                        <!-- Product Image -->
+                        <img src="{{ drone.image_url }}" alt="{{ drone.name }}" class="product-image">
+
+                        <!-- Product Details -->
+                        <h3 class="product-name">{{ drone.name }}</h3>
+                        <div class="price-section">
+                            {% if drone.discounted_price %}
+                                <span class="price">${{ drone.discounted_price }}</span>
+                                <span class="original-price">${{ drone.price }}</span>
+                            {% else %}
+                                <span class="price">${{ drone.price }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="rating">⭐⭐⭐⭐⭐ (0 reviews)</div>
+
+                        <!-- Action Buttons -->
+                        <div class="product-buttons">
+                            <a href="{{ url_for('view_drone', drone_id=drone.id) }}" class="quick-view-button">Quick View</a>
+                            <a href="{{ url_for('buy_now', product_id=drone.id) }}" class="buy-now-button">Buy Now</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 FPV Drone Shop. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
