@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore top-tier FPV drones at unbeatable prices. Shop now and elevate your flying experience!">
     <title>FPV Drone Shop</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
@@ -43,7 +43,7 @@
                 {% for drone in drones %}
                     <div class="product-card">
                         <!-- Product Image -->
-                        <img src="{{ drone.image_url }}" alt="{{ drone.name }}" class="product-image">
+                        <img src="images/drone1.jpg" alt="Drone Name" class="product-image">
 
                         <!-- Product Details -->
                         <h3 class="product-name">{{ drone.name }}</h3>
