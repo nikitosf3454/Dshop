@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore top-tier FPV drones at unbeatable prices. Shop now and elevate your flying experience!">
     <title>FPV Drone Shop</title>
-    <img src="static/images/{{ drone.image_url }}" alt="{{ drone.name }}" class="product-image">
-
+    <img src="{{ drone.image_url }}" alt="{{ drone.name }}" class="product-image">
 </head>
 
 <body>
-
-    <!-- Header -->
     <header>
         <div class="navigation">
             <a href="http://127.0.0.1:5000/motors">Motors</a>
@@ -19,7 +16,7 @@
         </div>
         <div class="profile-container">
             <button class="profile-button" onclick="window.location.href='{{ url_for('profile') }}'">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4z1mQAlc00ncZ2qpeqKjRSSv28pQ6McAmhg&s" alt="Profile Icon" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4z1mQAlc00ncZ2qpeqKjRSSv28pQ6McAmhg&s" alt="Profile Icon">
             </button>
         </div>
     </header>
